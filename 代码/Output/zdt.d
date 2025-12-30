@@ -1,0 +1,17 @@
+.\output\zdt.o: User\ZDT.c
+.\output\zdt.o: .\Libraries\CMSIS\stm32f10x.h
+.\output\zdt.o: .\Libraries\CMSIS\core_cm3.h
+.\output\zdt.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\zdt.o: .\Libraries\CMSIS\system_stm32f10x.h
+.\output\zdt.o: .\User\stm32f10x_conf.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_can.h
+.\output\zdt.o: .\Libraries\CMSIS\stm32f10x.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_dma.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_exti.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_gpio.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_rcc.h
+.\output\zdt.o: .\Libraries\FWlib\inc\stm32f10x_usart.h
+.\output\zdt.o: .\Libraries\FWlib\inc\misc.h
+.\output\zdt.o: .\bsp\CAN\bsp_CAN.h
+.\output\zdt.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\zdt.o: User\ZDT.h
