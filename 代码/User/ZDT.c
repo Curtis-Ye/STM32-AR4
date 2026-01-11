@@ -31,24 +31,61 @@ void encoder_Init(uint32_t ID)
 	myCANSendData(cmd, 3);
 }
 
-// 速度模式
-uint8_t ZDT_Vel_Control(uint32_t ID, uint8_t dir, uint16_t vel, uint8_t ac, uint8_t m_status)
+/**
+ * @brief 速度模式
+ * @param 结构体指针
+ * @retval void
+ */
+uint8_t ZDT_Vel_Control(velocity_parameter *parameter)
 {
 	uint8_t cmd[16] = {0};
-	cmd[0] = ID;
+	uint8_t acc;
+	uint16_t motor_vel;
+	switch (parameter->ID)
+	{
+	case J1:
+		acc = Reduction1 * (parameter->ac);
+		motor_vel = Reduction1 * (parameter->vel);
+		break;
+	case J2:
+		acc = Reduction2 * (parameter->ac);
+		motor_vel = Reduction2 * (parameter->vel);
+		break;
+	case J3:
+		acc = Reduction3 * (parameter->ac);
+		motor_vel = Reduction3 * (parameter->vel);
+		break;
+	case J4:
+		acc = Reduction4 * (parameter->ac);
+		motor_vel = Reduction4 * (parameter->vel);
+		break;
+	case J5:
+		acc = Reduction5 * (parameter->ac);
+		motor_vel = Reduction5 * (parameter->vel);
+		break;
+	case J6:
+		acc = Reduction6 * (parameter->ac);
+		motor_vel = Reduction6 * (parameter->vel);
+		break;
+	}
+	cmd[0] = parameter->ID;
 	cmd[1] = 0xF6;
-	cmd[2] = dir;
-	cmd[3] = (uint8_t)(vel >> 8);
-	cmd[4] = (uint8_t)(vel >> 0);
-	cmd[5] = ac;
-	cmd[6] = m_status;
+	cmd[2] = parameter->dir;
+	cmd[3] = (uint8_t)(motor_vel >> 8);
+	cmd[4] = (uint8_t)(motor_vel >> 0);
+	cmd[5] = acc;
+	cmd[6] = parameter->m_status;
 	cmd[7] = 0x6B;
 	uint8_t transmit_mailbox = myCANSendData(cmd, 8);
 	return transmit_mailbox;
 }
 
-// 停止运行
-uint8_t ZDT_Stop(uint32_t ID, uint8_t m_status)
+/**
+ * @brief 停止
+ * @param 电机ID和多机同步标志
+ * @retval void
+ */
+void ZDT_Stop(uint32_t ID, uint8_t m_status)
 {
 	uint8_t cmd[16] = {0};
 	cmd[0] = ID;
@@ -57,11 +94,14 @@ uint8_t ZDT_Stop(uint32_t ID, uint8_t m_status)
 	cmd[3] = m_status;
 	cmd[4] = 0x6B;
 	uint8_t transmit_mailbox = myCANSendData(cmd, 5);
-	return transmit_mailbox;
 }
 
-// 角度模式
-void ZDT_To_Position(position_parameter *parameter)
+/**
+ * @brief 位置模式
+ * @param 结构体指针
+ * @retval void
+ */
+void ZDT_Pos_Control(position_parameter *parameter)
 {
 	uint32_t pulse_temp;
 	uint16_t motor_vel = 0;
@@ -130,11 +170,10 @@ void ZDT_SetOrigin(uint32_t ID)
 {
 	uint8_t cmd[16] = {0};
 	cmd[0] = ID;
-	cmd[1] = 0x93;
-	cmd[2] = 0x88;
-	cmd[3] = 0x01;
-	cmd[4] = 0x6B;
-	myCANSendData(cmd, 5);
+	cmd[1] = 0x0A;
+	cmd[2] = 0x6D;
+	cmd[3] = 0x6B;
+	myCANSendData(cmd, 4);
 }
 
 // 返回原点
@@ -149,13 +188,34 @@ void ZDT_GoOrigin(uint32_t ID, uint8_t mode, uint8_t m_status)
 	myCANSendData(cmd, 5);
 }
 
-// 多机同步运动，第一个参数为电机数量，第二个参数为结构体数组
-void ZDT_MultiMotorMotion(uint8_t num, position_parameter *parameter)
+/**
+ * @brief 多机同步位置模式
+ * @param 电机数量和结构体指针
+ * @retval void
+ */
+void ZDT_Multi_PositonMotion(uint8_t num, position_parameter *parameter)
 {
 	uint8_t i = 0;
 	for (i = 0; i < num; i++)
 	{
-		ZDT_To_Position(parameter);
+		ZDT_Pos_Control(parameter);
+		parameter++;
+		delay_ms(10);
+	}
+	myCANSendData(synchronize, 4);
+}
+
+/**
+ * @brief 多机同步速度模式
+ * @param 电机数量和结构体指针
+ * @retval void
+ */
+void ZDT_Multi_VelocityMotion(uint8_t num, velocity_parameter *parameter)
+{
+	uint8_t i = 0;
+	for (i = 0; i < num; i++)
+	{
+		ZDT_Vel_Control(parameter);
 		parameter++;
 		delay_ms(10);
 	}

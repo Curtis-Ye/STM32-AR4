@@ -18,9 +18,7 @@
 .\output\main.o: .\bsp\USART\bsp_usart.h
 .\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\output\main.o: User\origin.h
 .\output\main.o: User\ZDT.h
 .\output\main.o: .\bsp\CAN\bsp_CAN.h
-.\output\main.o: User\Filter.h
 .\output\main.o: .\bsp\limitSwitch\limitSwitch.h
-.\output\main.o: .\bsp\w25qxx\bsp_w25qxx.h
-.\output\main.o: .\bsp\LCD_ILI9341\bsp_lcd_ili9341.h

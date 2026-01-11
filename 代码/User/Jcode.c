@@ -1,7 +1,7 @@
 #include "bsp_usart.h"
 #include <stdlib.h>
 char JcodeData; // 全局变量，接收串口数据
-char Jdata[10];
+char Jdata[10]; // J代码存储数组
 
 /*
 J代码格式示例：J1 (+-)30

@@ -12,7 +12,17 @@ typedef enum
 	backward
 } direction;
 
-// 电机角度控制参数
+// 电机速度模式控制参数
+typedef struct
+{
+	uint32_t ID;
+	uint8_t dir;
+	uint16_t vel;
+	uint8_t ac;
+	uint8_t m_status;
+} velocity_parameter;
+
+// 电机角度模式控制参数
 typedef struct
 {
 	uint32_t ID;	  // 电机ID
@@ -24,30 +34,33 @@ typedef struct
 } position_parameter;
 
 // 定义各个轴电机ID
-#define ALL 0x00
-#define J1 0x01
-#define J2 0x02
-#define J3 0x03
-#define J4 0x04
-#define J5 0x05
-#define J6 0x06
+typedef enum
+{
+	ALL,
+	J1,
+	J2,
+	J3,
+	J4,
+	J5,
+	J6
+} motor_ID;
 
 // 定义各轴电机减速比
-#define Reduction1 200
+#define Reduction1 50
 #define Reduction2 10
 #define Reduction3 10
-#define Reduction4 20
+#define Reduction4 10
 #define Reduction5 1
 #define Reduction6 7
 
 uint8_t ZDT_CAN_Init(void);
 void encoder_Init(uint32_t ID);
-uint8_t ZDT_Vel_Control(uint32_t ID, uint8_t dir, uint16_t vel, uint8_t ac, uint8_t m_status);
-uint8_t ZDT_Stop(uint32_t ID, uint8_t m_status);
-void ZDT_To_Position(position_parameter *parameter);
+uint8_t ZDT_Vel_Control(velocity_parameter *parameter);
+void ZDT_Stop(uint32_t ID, uint8_t m_status);
+void ZDT_Pos_Control(position_parameter *parameter);
 void ZDT_Read_CurrentPosition(uint8_t ID);
 void ZDT_SetOrigin(uint32_t ID);
 void ZDT_GoOrigin(uint32_t ID, uint8_t mode, uint8_t m_status);
-void ZDT_MultiMotorMotion(uint8_t num, position_parameter *parameter);
-
+void ZDT_Multi_PositonMotion(uint8_t num, position_parameter *parameter);
+void ZDT_Multi_VelocityMotion(uint8_t num, velocity_parameter *parameter);
 #endif

@@ -8,7 +8,7 @@
 // extern int16_t witomega[6];
 extern uint8_t JcodeData;
 extern uint8_t Jdata[10];
-position_parameter parameter1 = {J1, 100, 100, 0, 1, 1};
+position_parameter parameter1 = {J1, 100, 100, 0, 1, 0};
 xUSATR_TypeDef xUSART; // 声明为全局变量,方便记录信息、状态
 
 //////////////////////////////////////////////////////////////   USART-1   //////////////////////////////////////////////////////////////
@@ -91,7 +91,8 @@ void USART1_IRQHandler(void)
         JcodeData = USART_ReceiveData(USART1);
         Jcode_get(Jdata);
         parameter1.ID = Jdata[0];
-        parameter1.angle = Get_Jangle();
+        parameter1.angle = Get_J_Angle();
+        ZDT_Pos_Control(&parameter1);
         //		witGet=USART_ReceiveData(USART1);
         //		getAngleData(witangle);
         //		getAccData(witacc);

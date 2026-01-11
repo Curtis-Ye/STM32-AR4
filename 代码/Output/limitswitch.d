@@ -13,3 +13,6 @@
 .\output\limitswitch.o: .\Libraries\FWlib\inc\stm32f10x_usart.h
 .\output\limitswitch.o: .\Libraries\FWlib\inc\misc.h
 .\output\limitswitch.o: bsp\limitSwitch\limitSwitch.h
+.\output\limitswitch.o: .\User\ZDT.h
+.\output\limitswitch.o: .\bsp\CAN\bsp_CAN.h
+.\output\limitswitch.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

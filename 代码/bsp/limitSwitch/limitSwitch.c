@@ -1,7 +1,7 @@
 #include "stm32f10x.h" // Device header
 #include "limitSwitch.h"
+// 本项目定义限位开关为常开状态NO
 
-// 定义限位开关为常开状态NO
 // 限位开关初始化
 void limitSwitch_Init(void)
 {
@@ -9,13 +9,46 @@ void limitSwitch_Init(void)
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_InitStructure.GPIO_Pin = switch1 | switch2 | switch3 | switch4;
+	GPIO_InitStructure.GPIO_Pin = Switch1 | Switch2 | Switch3 | Switch4 | Switch5;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(limitSwitch_Pin, &GPIO_InitStructure);
+	GPIO_Init(LimitSwitch_Pin, &GPIO_InitStructure);
 }
 
-// 获取开关电平，由于开关常开即未触发时断开，IO口采用上拉输入，未输入状态为高电平，开关按下时为低电平
+/**
+ * @brief 获取限位开关状态
+ * @param 开关对应IO口
+ * @retval 0/1
+ */
 uint8_t limitSwitch_Getstatus(uint16_t GPIO_Pin)
 {
-	return GPIO_ReadInputDataBit(limitSwitch_Pin, GPIO_Pin);
+	return GPIO_ReadInputDataBit(LimitSwitch_Pin, GPIO_Pin);
+}
+
+/**
+ * @brief 到达限位后停止运动
+ * @param 开关对应IO口
+ * @retval 0/1 如果未回归原点则返回1,否则返回0
+ */
+uint8_t limitStop(uint16_t GPIO_Pin)
+{
+	if (limitSwitch_Getstatus(GPIO_Pin) == 0)
+	{
+		switch (GPIO_Pin)
+		{
+		case Switch1:
+			ZDT_Stop(J1, 0);
+			break;
+		case Switch2:
+			ZDT_Stop(J2, 0);
+			break;
+		case Switch3:
+			ZDT_Stop(J3, 0);
+			break;
+		case Switch4:
+			ZDT_Stop(J4, 0);
+			break;
+		}
+		return 0;
+	}
+	return 1;
 }
