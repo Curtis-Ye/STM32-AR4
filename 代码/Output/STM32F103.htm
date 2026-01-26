@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Output\STM32F103.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Output\STM32F103.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Jan 11 12:22:31 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Jan 26 20:02:03 2026
 <BR><P>
 <H3>Maximum Stack Usage =        248 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -363,8 +363,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[56]"></a>__aeabi_uldivmod</STRONG> (Thumb, 98 bytes, Stack size 40 bytes, uldiv.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
 <BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
@@ -393,10 +393,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[5c]"></a>__aeabi_dadd</STRONG> (Thumb, 322 bytes, Stack size 48 bytes, dadd.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+<BR><BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
@@ -426,8 +426,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[64]"></a>__aeabi_d2ulz</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, dfixul.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
@@ -483,9 +483,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[5e]"></a>_double_epilogue</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, depilogue.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+<BR><BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
@@ -504,9 +504,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6b]"></a>_scanf_really_real</STRONG> (Thumb, 556 bytes, Stack size 104 bytes, scanf_fp.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_is_digit
+<BR><BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_is_digit
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 </UL>
 
 <P><STRONG><a name="[49]"></a>_sgetc</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, _sgetc.o(.text))
@@ -890,12 +890,12 @@ Global Symbols
 <P><STRONG><a name="[94]"></a>__mathlib_tofloat</STRONG> (Thumb, 184 bytes, Stack size 24 bytes, narrow.o(i.__mathlib_tofloat))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = __mathlib_tofloat &rArr; frexp &rArr; __ARM_scalbn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee_status
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frexp
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee_status
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_narrow
 </UL>
@@ -925,7 +925,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_tofloat
 </UL>
 
-<P><STRONG><a name="[78]"></a>limitStop</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, limitswitch.o(i.limitStop))
+<P><STRONG><a name="[78]"></a>limitStop</STRONG> (Thumb, 170 bytes, Stack size 8 bytes, limitswitch.o(i.limitStop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = limitStop &rArr; ZDT_Stop &rArr; myCANSendData &rArr; CAN_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;limitSwitch_Getstatus
@@ -942,7 +942,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;limitStop
 </UL>
 
-<P><STRONG><a name="[a1]"></a>limitSwitch_Init</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, limitswitch.o(i.limitSwitch_Init))
+<P><STRONG><a name="[a1]"></a>limitSwitch_Init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, limitswitch.o(i.limitSwitch_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = limitSwitch_Init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init

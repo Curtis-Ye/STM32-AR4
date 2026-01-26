@@ -1,6 +1,7 @@
 #include <stm32f10x.h>
 #include "origin.h"
 
+extern uint8_t limitSwitchMode;
 #define SWITCHNUM 5
 
 /**
@@ -10,6 +11,7 @@
  */
 uint8_t All_Go_Origin(void)
 {
+        limitSwitchMode = 1;
         velocity_parameter origin[5] = {{J1, 1, 30, 10, 1}, {J2, 1, 30, 10, 1}, {J3, 1, 30, 10, 1}, {J4, 1, 30, 10, 1}, {J5, 1, 30, 10, 1}};
         uint8_t originArr[5] = {0, 0, 0, 0, 0};
         uint8_t SwitchArr[SWITCHNUM];
@@ -27,6 +29,7 @@ uint8_t All_Go_Origin(void)
                         if (SwitchArr[i] != originArr[i])
                         {
                                 m_state = 1;
+                                break; // 跳出本次循环,进行下一次状态采集
                         }
                         else
                         {
@@ -34,10 +37,8 @@ uint8_t All_Go_Origin(void)
                         }
                 }
         }
-        for (uint8_t j = 1; j <= 5; j++)
-        {
-                ZDT_SetOrigin(j);
-        }
+        ZDT_SetOrigin(0x00);
+        limitSwitchMode = 0;
         return 1;
 }
 
