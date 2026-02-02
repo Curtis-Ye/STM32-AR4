@@ -17,3 +17,8 @@
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\output\jcode.o: User\Jcode.h
+.\output\jcode.o: User\ZDT.h
+.\output\jcode.o: .\bsp\CAN\bsp_CAN.h
+.\output\jcode.o: User\origin.h
+.\output\jcode.o: .\bsp\limitSwitch\limitSwitch.h

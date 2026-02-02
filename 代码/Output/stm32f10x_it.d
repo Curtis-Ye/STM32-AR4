@@ -15,3 +15,16 @@
 .\output\stm32f10x_it.o: .\Libraries\FWlib\inc\misc.h
 .\output\stm32f10x_it.o: .\bsp\LED\bsp_led.h
 .\output\stm32f10x_it.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\stm32f10x_it.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\stm32f10x_it.o: .\User\FreeRTOSConfig.h
+.\output\stm32f10x_it.o: .\bsp\USART\bsp_usart.h
+.\output\stm32f10x_it.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\stm32f10x_it.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\projdefs.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\portable.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\stm32f10x_it.o: .\FreeRTOS\port\RVDS\ARM_CM4F\portmacro.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\task.h
+.\output\stm32f10x_it.o: .\FreeRTOS\include\list.h

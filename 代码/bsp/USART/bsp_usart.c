@@ -2,13 +2,11 @@
 #include "wit.h"
 #include "Jcode.h"
 #include "ZDT.h"
-// extern uint8_t witGet;
-// extern int16_t witangle[6];
-// extern int16_t witacc[6];
-// extern int16_t witomega[6];
+
 extern uint8_t JcodeData;
-extern uint8_t Jdata[10];
-position_parameter parameter1 = {J1, 100, 100, 0, 1, 0};
+extern char Jdata[25];
+volatile uint8_t USART1_Status = 0;
+position_parameter parameter1 ;
 xUSATR_TypeDef xUSART; // 声明为全局变量,方便记录信息、状态
 
 //////////////////////////////////////////////////////////////   USART-1   //////////////////////////////////////////////////////////////
@@ -59,7 +57,7 @@ void USART1_Init(uint32_t baudrate)
 
     USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
     USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // 使能接受中断
-    USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); // 使能空闲中断
+    //USART_ITConfig(USART1, USART_IT_IDLE, ENABLE); // 使能空闲中断
 
     USART_Cmd(USART1, ENABLE); // 使能串口, 开始工作
 
@@ -85,18 +83,23 @@ static uint8_t U1TxCount = 0;   // 用于中断发送：标记将要发送的字节数(环形)
 
 void USART1_IRQHandler(void)
 {
-
+	static uint8_t i = 0;
     if (USART_GetFlagStatus(USART1, USART_IT_RXNE) == SET)
     {
-        JcodeData = USART_ReceiveData(USART1);
-        Jcode_get(Jdata);
-        parameter1.ID = Jdata[0];
-        parameter1.angle = Get_J_Angle();
-        ZDT_Pos_Control(&parameter1);
-        //		witGet=USART_ReceiveData(USART1);
-        //		getAngleData(witangle);
-        //		getAccData(witacc);
-        //		getWomegaData(witomega);
+        if (USART1_Status == 0)
+        {     
+            JcodeData = USART_ReceiveData(USART1);
+            Jdata[i] = JcodeData;
+            i++;
+            if (JcodeData == '\n')
+            {
+                USART1_Status = 1;
+                i = 0;
+            }
+        }
+        USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+		USART1->SR;
+        USART1->DR;
     }
 }
 

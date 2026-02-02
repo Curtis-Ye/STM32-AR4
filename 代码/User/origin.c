@@ -2,6 +2,7 @@
 #include "origin.h"
 
 extern uint8_t limitSwitchMode;
+extern uint8_t swStatusArr[5];
 #define SWITCHNUM 5
 
 /**
@@ -12,7 +13,7 @@ extern uint8_t limitSwitchMode;
 uint8_t All_Go_Origin(void)
 {
         limitSwitchMode = 1;
-        velocity_parameter origin[5] = {{J1, 1, 30, 10, 1}, {J2, 1, 30, 10, 1}, {J3, 1, 30, 10, 1}, {J4, 1, 30, 10, 1}, {J5, 1, 30, 10, 1}};
+        velocity_parameter origin[5] = {{J1, 1, 10, 10, 1}, {J2, 1, 10, 10, 1}, {J3, 1, 10, 10, 1}, {J4, 1, 10, 10, 1}, {J5, 1, 10, 10, 1}};
         uint8_t originArr[5] = {0, 0, 0, 0, 0};
         uint8_t SwitchArr[SWITCHNUM];
         uint8_t m_state = 1;
@@ -49,10 +50,9 @@ uint8_t All_Go_Origin(void)
  */
 uint8_t Go_Origin(uint32_t ID)
 {
-        uint8_t limitSwitch_State;
+        uint8_t limitSwitch_State = 1;
         uint16_t GPIO_Pin;
         velocity_parameter origin = {ID, 1, 30, 10, 1};
-        ZDT_Multi_VelocityMotion(1, &origin);
         switch (ID)
         {
         case J1:
@@ -70,6 +70,10 @@ uint8_t Go_Origin(uint32_t ID)
         case J5:
                 GPIO_Pin = Switch5;
                 break;
+        }
+        if (swStatusArr[ID - 1] != 1)
+        {
+                ZDT_Multi_VelocityMotion(1, &origin);
         }
         while (limitSwitch_State)
         {

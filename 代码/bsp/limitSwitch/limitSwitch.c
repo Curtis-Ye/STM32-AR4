@@ -2,8 +2,8 @@
 #include "limitSwitch.h"
 // 本项目使用限位开关为常开状态NO，初始状态引脚为高电平，开关触发引脚为低电平
 
-uint8_t limitSwitchMode; // 初始值为0，具体用法为：初始状态时，限位开关全局函数循环。当状态改变，即调用回零函数，暂时跳出全局循环，避免出错。
-uint8_t swStatusArr[5] = {0, 0, 0, 0, 0};
+uint8_t limitSwitchMode;		  // 初始值为0，具体用法为：初始状态时，限位开关全局函数循环。当状态改变，即调用回零函数，暂时跳出全局循环，避免出错。
+uint8_t swStatusArr[5] = {0, 0, 0, 0, 0}; // 限位开关状态数组，开关未被触发初始值为0，被触发后变为1.
 
 // 限位开关初始化
 void limitSwitch_Init(void)

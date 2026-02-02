@@ -4,7 +4,10 @@
 #include "bsp_key.h"
 #include "bsp_usart.h"
 #include "origin.h"
-
+#include "Jcode.h"
+#include "FreeRTOS.h"
+#include "task.h"
+extern uint8_t USART1_Status;
 static void delay_ms(uint32_t ms)
 {
 	ms = ms * 10240;
@@ -22,9 +25,12 @@ int main(void)
 	limitSwitch_Init();				     // 限位开关初始化
 	ZDT_CAN_Init();					     // CAN初始化
 	delay_ms(1000);
-	Go_Origin(J1);
 	while (1)
 	{
+		if (USART1_Status == 1)
+		{
+			USART1_Data_process();
+		}
 		delay_ms(1);		  // 延时
 		static uint16_t time = 0; // 用于计算过了多少时间
 		if (time++ % 1000 == 0)	  // 每1秒对外发送一次报文，方便测试

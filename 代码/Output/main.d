@@ -22,3 +22,14 @@
 .\output\main.o: User\ZDT.h
 .\output\main.o: .\bsp\CAN\bsp_CAN.h
 .\output\main.o: .\bsp\limitSwitch\limitSwitch.h
+.\output\main.o: User\Jcode.h
+.\output\main.o: .\FreeRTOS\include\FreeRTOS.h
+.\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\output\main.o: .\User\FreeRTOSConfig.h
+.\output\main.o: .\FreeRTOS\include\projdefs.h
+.\output\main.o: .\FreeRTOS\include\portable.h
+.\output\main.o: .\FreeRTOS\include\deprecated_definitions.h
+.\output\main.o: .\FreeRTOS\port\RVDS\ARM_CM4F\portmacro.h
+.\output\main.o: .\FreeRTOS\include\mpu_wrappers.h
+.\output\main.o: .\FreeRTOS\include\task.h
+.\output\main.o: .\FreeRTOS\include\list.h
