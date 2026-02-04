@@ -1,12 +1,15 @@
 #include <stm32f10x.h>
 #include "bsp_CAN.h"
 #include "ZDT.h"
+#include "bsp_usart.h"
 
+extern uint8_t swStatusArr[5];
 uint8_t synchronize[4] = {0x00, 0xFF, 0x66, 0x6B}; // 多机同步指令
 
 /*
 	注意！！！！！
-	角度模式控制单个电机运动时，多机同步标志设置为0，否则不运动
+	角度模式控制单个电机运动时，多机同步标志设置为0，否则不运动。
+	关于电机转向：俯视输出轴方向，规定逆时针为正转，顺时针为反转。ZDT电机参数设为1时为反转，设为0为正转。
 */
 
 static void delay_ms(uint32_t ms)
@@ -103,40 +106,60 @@ void ZDT_Stop(uint32_t ID, uint8_t m_status)
  */
 void ZDT_Pos_Control(position_parameter *parameter)
 {
-	uint32_t pulse_temp;
+	uint32_t pulse_temp = 0; // 为以下变量赋予缺省值
 	uint16_t motor_vel = 0;
-	uint8_t dir = forward;
-	switch (parameter->ID)
+	uint8_t forward = 0;
+	uint8_t backward = 0;
+	uint8_t dir = 0;
+	switch (parameter->ID) // 电机ID选择以及关节正反转设定
 	{
 	case J1:
 		pulse_temp = Reduction1 * 12800;
 		motor_vel = Reduction1 * (parameter->vel);
+		forward = 0;
+		backward = 1;
 		break;
 	case J2:
 		pulse_temp = Reduction2 * 12800;
 		motor_vel = Reduction2 * (parameter->vel);
+		forward = 0;
+		backward = 1;
 		break;
 	case J3:
 		pulse_temp = Reduction3 * 12800;
 		motor_vel = Reduction3 * (parameter->vel);
+		forward = 1;
+		backward = 0;
 		break;
 	case J4:
 		pulse_temp = Reduction4 * 12800;
 		motor_vel = Reduction4 * (parameter->vel);
+		forward = 1;
+		backward = 0;
 		break;
 	case J5:
 		pulse_temp = Reduction5 * 12800;
 		motor_vel = Reduction5 * (parameter->vel);
+		forward = 0;
+		backward = 1;
 		break;
 	case J6:
 		pulse_temp = Reduction6 * 12800;
 		motor_vel = Reduction6 * (parameter->vel);
+		forward = 0;
+		backward = 1;
 		break;
 	}
 	if (motor_vel > 3000) // 电机速度限幅
 		motor_vel = 3000;
 	if ((parameter->angle) < 0) // 旋转方向判断
+	{
 		dir = backward;
+	}
+	else
+	{
+		dir = forward;
+	}
 	uint32_t pulse = ((parameter->angle) / 360.0f) * pulse_temp;
 	uint8_t cmd[16] = {0};
 	cmd[0] = parameter->ID;
@@ -152,7 +175,23 @@ void ZDT_Pos_Control(position_parameter *parameter)
 	cmd[10] = parameter->mode;
 	cmd[11] = parameter->m_status;
 	cmd[12] = 0x6B;
-	myCANSendData(cmd, 13);
+	if (swStatusArr[(cmd[0] - 1)] == 0 && dir == backward) // 限位开关触发，仍要反转
+	{
+		printf("status error\r");
+	}
+	else if (swStatusArr[(cmd[0] - 1)] == 0 && (dir == forward && (parameter->angle) < 5)) // 限位开关触发，但正转角度不足以复位开关
+	{
+		printf("angle error\r");
+	}
+	else if (swStatusArr[(cmd[0] - 1)] == 0 && (dir == forward && (parameter->angle) >= 5)) // 限位开关触发，正转角度符合要求
+	{
+		myCANSendData(cmd, 13);
+		swStatusArr[(cmd[0] - 1)] = 1;
+	}
+	else
+	{
+		myCANSendData(cmd, 13);
+	}
 }
 
 // 读取当前角度
@@ -220,4 +259,11 @@ void ZDT_Multi_VelocityMotion(uint8_t num, velocity_parameter *parameter)
 		delay_ms(10);
 	}
 	myCANSendData(synchronize, 4);
+}
+
+void ZDT_Delay_ms(uint32_t ms)
+{
+	ms = ms * 10240;
+	for (uint32_t i = 0; i < ms; i++)
+		; // 72MHz系统时钟下，多少个空循环约耗时1ms
 }

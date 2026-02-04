@@ -3,7 +3,7 @@
 // 本项目使用限位开关为常开状态NO，初始状态引脚为高电平，开关触发引脚为低电平
 
 uint8_t limitSwitchMode;		  // 初始值为0，具体用法为：初始状态时，限位开关全局函数循环。当状态改变，即调用回零函数，暂时跳出全局循环，避免出错。
-uint8_t swStatusArr[5] = {0, 0, 0, 0, 0}; // 限位开关状态数组，开关未被触发初始值为0，被触发后变为1.
+uint8_t swStatusArr[5] = {1, 1, 1, 1, 1}; // 限位开关状态数组，开关未被触发初始值为1，被触发后变为0。若状态改变则不重复发送指令
 
 // 限位开关初始化
 void limitSwitch_Init(void)
@@ -89,7 +89,7 @@ void simple_Stop(void)
 	if (!limitSwitchMode)
 	{
 		uint8_t i = 1;
-		uint8_t limitSwitch_Value[5] = {1, 1, 1, 1, 1}; // 限位开关值数组，初始状态为高电平1
+		uint8_t limitSwitch_Value[5] = {1, 1, 1, 1, 1}; // 限位开关值数组，初始状态为高电平1。实时更新
 		limitSwitch_Value[0] = limitSwitch_Getstatus(Switch1);
 		limitSwitch_Value[1] = limitSwitch_Getstatus(Switch2);
 		limitSwitch_Value[2] = limitSwitch_Getstatus(Switch3);
@@ -97,10 +97,12 @@ void simple_Stop(void)
 		limitSwitch_Value[4] = limitSwitch_Getstatus(Switch5);
 		for (; i <= 5; i++)
 		{
-			if (limitSwitch_Value[i - 1] == 0 && swStatusArr[i - 1] != 1)
+			if (limitSwitch_Value[i - 1] == 0 && swStatusArr[i - 1] == 1)
 			{
 				ZDT_Stop(i, 0);
-				swStatusArr[i - 1] = 1;
+				swStatusArr[i - 1] = 0;
+				ZDT_Delay_ms(1);
+				ZDT_SetOrigin(i);
 			}
 		}
 	}

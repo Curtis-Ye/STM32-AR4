@@ -1,8 +1,11 @@
 .\output\jcode.o: User\Jcode.c
-.\output\jcode.o: .\bsp\USART\bsp_usart.h
+.\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\output\jcode.o: User\Jcode.h
+.\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\jcode.o: User\ZDT.h
+.\output\jcode.o: .\bsp\CAN\bsp_CAN.h
 .\output\jcode.o: .\Libraries\CMSIS\stm32f10x.h
 .\output\jcode.o: .\Libraries\CMSIS\core_cm3.h
-.\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\jcode.o: .\Libraries\CMSIS\system_stm32f10x.h
 .\output\jcode.o: .\User\stm32f10x_conf.h
 .\output\jcode.o: .\Libraries\FWlib\inc\stm32f10x_can.h
@@ -14,11 +17,8 @@
 .\output\jcode.o: .\Libraries\FWlib\inc\stm32f10x_usart.h
 .\output\jcode.o: .\Libraries\FWlib\inc\misc.h
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\jcode.o: .\bsp\USART\bsp_usart.h
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\output\jcode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\output\jcode.o: User\Jcode.h
-.\output\jcode.o: User\ZDT.h
-.\output\jcode.o: .\bsp\CAN\bsp_CAN.h
 .\output\jcode.o: User\origin.h
 .\output\jcode.o: .\bsp\limitSwitch\limitSwitch.h

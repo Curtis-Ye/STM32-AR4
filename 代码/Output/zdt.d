@@ -15,3 +15,6 @@
 .\output\zdt.o: .\bsp\CAN\bsp_CAN.h
 .\output\zdt.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\zdt.o: User\ZDT.h
+.\output\zdt.o: .\bsp\USART\bsp_usart.h
+.\output\zdt.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\zdt.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

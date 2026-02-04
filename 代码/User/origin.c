@@ -13,7 +13,7 @@ extern uint8_t swStatusArr[5];
 uint8_t All_Go_Origin(void)
 {
         limitSwitchMode = 1;
-        velocity_parameter origin[5] = {{J1, 1, 10, 10, 1}, {J2, 1, 10, 10, 1}, {J3, 1, 10, 10, 1}, {J4, 1, 10, 10, 1}, {J5, 1, 10, 10, 1}};
+        velocity_parameter origin[5] = {{J1, 1, 10, 10, 1}, {J2, 1, 10, 10, 1}, {J3, 0, 10, 10, 1}, {J4, 1, 10, 10, 1}, {J5, 1, 10, 10, 1}};
         uint8_t originArr[5] = {0, 0, 0, 0, 0};
         uint8_t SwitchArr[SWITCHNUM];
         uint8_t m_state = 1;
@@ -71,7 +71,7 @@ uint8_t Go_Origin(uint32_t ID)
                 GPIO_Pin = Switch5;
                 break;
         }
-        if (swStatusArr[ID - 1] != 1)
+        if (swStatusArr[ID - 1] != 0)
         {
                 ZDT_Multi_VelocityMotion(1, &origin);
         }

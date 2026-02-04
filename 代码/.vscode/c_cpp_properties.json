@@ -25,9 +25,14 @@
                 "e:\\AR4\\CAN通信\\代码\\bsp\\OLED",
                 "e:\\AR4\\CAN通信\\代码\\bsp\\wit",
                 "e:\\AR4\\CAN通信\\代码\\bsp\\limitSwitch",
+                "e:\\AR4\\CAN通信\\代码\\FreeRTOS\\include",
+                "e:\\AR4\\CAN通信\\代码\\FreeRTOS\\src",
+                "e:\\AR4\\CAN通信\\代码\\FreeRTOS\\port\\RVDS\\ARM_CM4F",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "e:\\AR4\\CAN通信\\代码\\System"
+                "e:\\AR4\\CAN通信\\代码\\System",
+                "e:\\AR4\\CAN通信\\代码\\FreeRTOS\\port\\MemMang",
+                "e:\\AR4\\CAN通信\\代码\\FreeRTOS\\port\\RVDS\\ARM_CM3"
             ],
             "defines": [
                 "STM32F10X_HD",

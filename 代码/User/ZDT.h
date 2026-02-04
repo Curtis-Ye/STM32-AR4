@@ -5,13 +5,6 @@
 
 #define pi 180.0 // 弧度制
 
-// 电机旋转方向，以输出轴顺时针为正方向
-typedef enum
-{
-	forward = 0,
-	backward
-} direction;
-
 // 电机速度模式控制参数
 typedef struct
 {
@@ -63,4 +56,5 @@ void ZDT_SetOrigin(uint32_t ID);
 void ZDT_GoOrigin(uint32_t ID, uint8_t mode, uint8_t m_status);
 void ZDT_Multi_PositonMotion(uint8_t num, position_parameter *parameter);
 void ZDT_Multi_VelocityMotion(uint8_t num, velocity_parameter *parameter);
+void ZDT_Delay_ms(uint32_t ms);
 #endif

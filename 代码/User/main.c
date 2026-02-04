@@ -1,19 +1,11 @@
 #include <stm32f10x.h>	    // 头文件引用(标准库); 内核、芯片外设....；(stm32f10x.conf.h, 对标准库头文件进行调用)
 #include "stm32f10x_conf.h" // 头文件引用(标准库); 内核、芯片外设....；(stm32f10x.conf.h, 对标准库头文件进行调用)
 #include "bsp_led.h"
-#include "bsp_key.h"
-#include "bsp_usart.h"
-#include "origin.h"
 #include "Jcode.h"
 #include "FreeRTOS.h"
 #include "task.h"
 extern uint8_t USART1_Status;
-static void delay_ms(uint32_t ms)
-{
-	ms = ms * 10240;
-	for (uint32_t i = 0; i < ms; i++)
-		; // 72MHz系统时钟下，多少个空循环约耗时1ms
-}
+
 int main(void)
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);	     // 中断分组，组2:抢占级0~3,子优先级0~3 ; 全局只设置一次，尽量放在显眼的地方
@@ -24,14 +16,15 @@ int main(void)
 	LED_BLUE_OFF;					     // 蓝灯，这里用作USB连接指示：亮-连接成功，灭-未连接
 	limitSwitch_Init();				     // 限位开关初始化
 	ZDT_CAN_Init();					     // CAN初始化
-	delay_ms(1000);
+	ZDT_Delay_ms(1000);
 	while (1)
 	{
-		if (USART1_Status == 1)
+		simple_Stop();		// 限位开关保护任务
+		if (USART1_Status == 1) // 串口处理任务
 		{
 			USART1_Data_process();
 		}
-		delay_ms(1);		  // 延时
+		ZDT_Delay_ms(1);		  // 延时
 		static uint16_t time = 0; // 用于计算过了多少时间
 		if (time++ % 1000 == 0)	  // 每1秒对外发送一次报文，方便测试
 		{

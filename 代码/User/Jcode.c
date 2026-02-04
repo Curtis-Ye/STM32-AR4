@@ -1,7 +1,5 @@
-#include "bsp_usart.h"
 #include <stdlib.h>
 #include "Jcode.h"
-#include "origin.h"
 
 char JcodeData; // 全局变量，接收串口数据
 char Jdata[25]; // 串口数据存储数组
@@ -10,7 +8,7 @@ extern position_parameter parameter1;
 
 /*
 J代码格式示例：J1 (+-)xx Vxx Axx 1/0
-格式解析：J+电机ID+旋转角度
+格式解析：J+电机ID+旋转角度+速度+加速度+正反转
 整体实现流程：接收到串口数据——>将正确数据存入数组——>解析对应数据——>发送电机控制指令
 */
 

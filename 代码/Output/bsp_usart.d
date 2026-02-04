@@ -20,3 +20,5 @@
 .\output\bsp_usart.o: .\User\Jcode.h
 .\output\bsp_usart.o: .\User\ZDT.h
 .\output\bsp_usart.o: .\bsp\CAN\bsp_CAN.h
+.\output\bsp_usart.o: .\User\origin.h
+.\output\bsp_usart.o: .\bsp\limitSwitch\limitSwitch.h
