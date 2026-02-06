@@ -5,6 +5,8 @@
 ".\output\pid.o"
 ".\output\jcode.o"
 ".\output\origin.o"
+".\output\init.o"
+".\output\mytask.o"
 ".\output\bsp_led.o"
 ".\output\bsp_usart.o"
 ".\output\bsp_key.o"

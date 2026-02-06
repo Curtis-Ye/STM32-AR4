@@ -1,37 +1,40 @@
 /***********************************************************************************************************************************
- ** ¡¾ÎÄ¼þÃû³Æ¡¿  led.c
- ** ¡¾ÌÔ    ±¦¡¿  Ä§Å®¿ª·¢°å      https://demoboard.taobao.com
+ ** ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½  led.c
+ ** ï¿½ï¿½ï¿½ï¿½    ï¿½ï¿½ï¿½ï¿½  Ä§Å®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      https://demoboard.taobao.com
  ***********************************************************************************************************************************
- ** ¡¾ÎÄ¼þ¹¦ÄÜ¡¿  ÊµÏÖLEDÖ¸Ê¾µÆ³£ÓÃµÄ³õÊ¼»¯º¯Êý¡¢¹¦ÄÜº¯Êý
- **                 
- ** ¡¾ÒÆÖ²ËµÃ÷¡¿  
- **             
- ** ¡¾¸üÐÂ¼ÇÂ¼¡¿  
+ ** ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ü¡ï¿½  Êµï¿½ï¿½LEDÖ¸Ê¾ï¿½Æ³ï¿½ï¿½ÃµÄ³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½
  **
-***********************************************************************************************************************************/  
+ ** ï¿½ï¿½ï¿½ï¿½Ö²Ëµï¿½ï¿½ï¿½ï¿½
+ **
+ ** ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Â¼ï¿½ï¿½
+ **
+ ***********************************************************************************************************************************/
 #include "bsp_led.h"
 
-
-    
-
 void Led_Init(void)
-{    
-    GPIO_InitTypeDef GPIO_InitStructure;                    // ¶¨ÒåÒ»¸öGPIO_InitTypeDefÀàÐÍµÄ½á¹¹Ìå
-    
-    // Ê¹ÄÜÏà¹ØÊ±ÖÓ
-    RCC_APB2PeriphClockCmd(LED_BLUE_CLK , ENABLE);          // Ê¹ÄÜLED_BLUEËùÓÃÒý½ÅµÄ¶Ë¿ÚÊ±ÖÓ
-    
-    // ÅäÖÃLED_BLUEÒý½Å¹¤×÷Ä£Ê½
-    GPIO_InitStructure.GPIO_Pin   = LED_BLUE_PIN;           // Ñ¡ÔñÒª¿ØÖÆµÄGPIOÒý½Å       
-    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;       // ÉèÖÃÒý½ÅÄ£Ê½ÎªÍ¨ÓÃÍÆÍìÊä³ö   
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;       // ÉèÖÃÒý½ÅËÙÂÊÎª50MHz            
-    GPIO_Init(LED_BLUE_GPIO , &GPIO_InitStructure);         // µ÷ÓÃ¿âº¯Êý£¬³õÊ¼»¯GPIO    
-   
+{
+    GPIO_InitTypeDef GPIO_InitStructure; // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½GPIO_InitTypeDefï¿½ï¿½ï¿½ÍµÄ½á¹¹ï¿½ï¿½
 
-    LED_BLUE_GPIO ->BSRR = LED_BLUE_PIN ;                   // µãÁÁLED_BLUE£¬µÍµçÆ½µãÁÁ
-                               
-    printf("LED Ö¸Ê¾µÆ            ÅäÖÃÍê³É\r");     
+    // Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    RCC_APB2PeriphClockCmd(LED_BLUE_CLK, ENABLE); // Ê¹ï¿½ï¿½LED_BLUEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅµÄ¶Ë¿ï¿½Ê±ï¿½ï¿½
+
+    // ï¿½ï¿½ï¿½ï¿½LED_BLUEï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½Ä£Ê½
+    GPIO_InitStructure.GPIO_Pin = LED_BLUE_PIN;       // Ñ¡ï¿½ï¿½Òªï¿½ï¿½ï¿½Æµï¿½GPIOï¿½ï¿½ï¿½ï¿½
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ÎªÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª50MHz
+    GPIO_Init(LED_BLUE_GPIO, &GPIO_InitStructure);    // ï¿½ï¿½ï¿½Ã¿âº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½GPIO
+
+    LED_BLUE_GPIO->BSRR = LED_BLUE_PIN; // ï¿½ï¿½ï¿½ï¿½LED_BLUEï¿½ï¿½ï¿½Íµï¿½Æ½ï¿½ï¿½ï¿½ï¿½
+
+    printf("LED Ö¸Ê¾ï¿½ï¿½            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r");
 }
 
+void LED_ON(void)
+{
+	  GPIO_ResetBits(LED_BLUE_GPIO,LED_BLUE_PIN);
+}
 
-
+void LED_OFF(void)
+{
+	  GPIO_SetBits(LED_BLUE_GPIO,LED_BLUE_PIN);
+}

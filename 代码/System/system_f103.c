@@ -65,15 +65,15 @@ void System_SysTickInit(void)
  * 参  数：
  * 返回值：
 *****************************************************************************/
-void SysTick_Handler(void)
-{
-    sysTickCnt++;             // 1ms 加1次    
-    
-    
-    #ifdef __SCHEDULER_H     // 任务调度器；如果引用了scheduler.h文件，就调用下面的函数
-        Scheduler_TickCnt();      
-    #endif
-}
+//void SysTick_Handler(void)
+//{
+//    sysTickCnt++;             // 1ms 加1次    
+//    
+//    
+//    #ifdef __SCHEDULER_H     // 任务调度器；如果引用了scheduler.h文件，就调用下面的函数
+//        Scheduler_TickCnt();      
+//    #endif
+//}
 
 /*****************************************************************************
  * 函  数： System_GetRunTimes
